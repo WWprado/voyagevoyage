@@ -3,10 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon premier site</title>
+    <title>Voyager à Vélo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .article {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .article h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .article p {
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur mon site web !</h1>
-    <p>Ce site est hébergé sur GitHub Pages.</p>
+    <header>Voyager à Vélo</header>
+    <nav>
+        <a href="#">Accueil</a>
+        <a href="#">Articles</a>
+        <a href="#">Itinéraires</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div class="container">
+        <div class="article">
+            <h2>Comment bien préparer son voyage à vélo ?</h2>
+            <p>Découvrez les essentiels pour un road trip à vélo réussi...</p>
+        </div>
+        <div class="article">
+            <h2>Les plus belles routes cyclables d’Europe</h2>
+            <p>Un tour d’horizon des itinéraires incontournables...</p>
+        </div>
+        <div class="article">
+            <h2>Voyager léger : les indispensables</h2>
+            <p>Que mettre dans ses sacoches pour un voyage optimisé...</p>
+        </div>
+    </div>
 </body>
 </html>

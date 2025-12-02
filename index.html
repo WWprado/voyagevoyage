@@ -141,7 +141,7 @@
       var target = document.getElementById(id + '-content');
       if(target && !target.dataset.loaded){
         var slug = id.replace(/^win-/, '');
-        var path = '/' + slug + '.html';
+        var path = '/' + slug + '/index.html';
         fetch(path, {cache: 'no-store'})
           .then(function(resp){
             if(!resp.ok) throw new Error('HTTP ' + resp.status);

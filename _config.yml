@@ -1,3 +1,15 @@
-title: Voyage Voyage
-description: A collection of pages
+# Basic site configuration for GitHub Pages
+title: VoyageVoyage
+description: Mon site statique converti pour GitHub Pages (Jekyll)
+baseurl: "" # change if site is served from a subpath
+url: "https://WWprado.github.io/voyagevoyage" # adjust if different
+
 theme: jekyll-theme-minimal
+
+# Markdown engine
+markdown: kramdown
+
+# Exclude any dev or build files
+exclude:
+  - "node_modules"
+  - "vendor"

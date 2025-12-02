@@ -1,11 +1,13 @@
 ---
 layout: default
-title: Home
+title: Accueil
 ---
 
-# Welcome
+# Bienvenue
 
-- [Souvenir](souvenir/)
-- [Pense à toi](pense/)
-- [Librairie](librairie/)
-- [Poème](poeme/)
+Bienvenue sur VoyageVoyage — choisissez une page :
+
+- [Souvenir](/souvenir/)
+- [Pense à toi](/pense/)
+- [La Page Financière — Librairie](/librairie/)
+- [Poème](/poeme/)

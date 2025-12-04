@@ -57,10 +57,10 @@
       <h1 class="section-header">Preview: Sidecar Layout (styled)</h1>
 
       <nav style="display:flex;gap:12px;margin:18px 0 26px 0;align-items:center">
-        <a href="#" class="button" onclick="openWindow('win-librairie');return false;">librairie</a>
-        <a href="#" class="button" onclick="openWindow('win-poeme');return false;">Poème</a>
-        <a href="#" class="button" onclick="openWindow('win-pense');return false;">Pense à toi</a>
-        <a href="#" class="button" onclick="openWindow('win-souvenir');return false;">Souvenir</a>
+        <a href="./librairie/index.html" class="button" onclick="openWindow('win-librairie');return false;">librairie</a>
+        <a href="./poeme/index.html" class="button" onclick="openWindow('win-poeme');return false;">Poème</a>
+        <a href="./pense/index.html" class="button" onclick="openWindow('win-pense');return false;">Pense à toi</a>
+        <a href="./souvenir/index.html" class="button" onclick="openWindow('win-souvenir');return false;">Souvenir</a>
       </nav>
 
       <div class="grid">
@@ -136,26 +136,37 @@
     el.style.display='block';
     el.setAttribute('aria-hidden','false');
 
-    // If opening any window with id starting with "win-", lazy-load matching file from /<slug>.html
+    // If opening any window with id starting with "win-", lazy-load matching file from either
+    // "./slug.html" or "./slug/index.html" (try them in order). Relative paths work when
+    // serving locally or via GitHub Pages. Anchors also provide a fallback link.
     if(id && id.indexOf('win-') === 0){
       var target = document.getElementById(id + '-content');
       if(target && !target.dataset.loaded){
         var slug = id.replace(/^win-/, '');
-        var path = '/' + slug + '.html';
-        fetch(path, {cache: 'no-store'})
-          .then(function(resp){
-            if(!resp.ok) throw new Error('HTTP ' + resp.status);
-            return resp.text();
-          })
-          .then(function(html){
-            target.innerHTML = html;
-            target.dataset.loaded = '1';
-          })
-          .catch(function(err){
-            target.innerHTML = '<p>Impossible de charger le contenu. Placez un fichier <code>' + slug + '.html</code> à la racine du site (ou <code>/' + slug + '/index.html</code>), puis servez via HTTP/GitHub Pages.</p>' +
-              '<p style="opacity:.9">Erreur: ' + String(err) + '</p>';
+        var attempts = [ './' + slug + '.html', './' + slug + '/index.html' ];
+
+        // Try each path in sequence until one succeeds
+        (function tryNext(i){
+          if(i >= attempts.length){
+            target.innerHTML = '<p>Impossible de charger le contenu. Placez un fichier <code>' + slug + '.html</code> à la racine du site (ou <code>./' + slug + '/index.html</code>), puis servez via HTTP/GitHub Pages.</p>' +
+              '<p style="opacity:.9">Aucune ressource trouvée pour: ' + slug + '</p>';
             target.dataset.loaded = 'error';
-          });
+            return;
+          }
+          var path = attempts[i];
+          fetch(path, {cache: 'no-store'})
+            .then(function(resp){
+              if(!resp.ok) throw new Error('HTTP ' + resp.status);
+              return resp.text();
+            })
+            .then(function(html){
+              target.innerHTML = html;
+              target.dataset.loaded = '1';
+            })
+            .catch(function(){
+              tryNext(i+1);
+            });
+        })(0);
       }
     }
   }
